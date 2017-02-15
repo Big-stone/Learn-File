@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>each封装</title>
+</head>
+<body>
+
+</body>
+<script>
+  	
+  	//完整的封装each方法
+  	function isArrayLike( obj ) { 
+
+  			//判断传进来对象借用object原型上的tostring方法后是不是等于object Array
+  		if( Object.prototype.toString.call( obj ) == '[ object Array ]' ) { 
+
+  		    return true;
+  		 };
+
+  		 var length = 'length' in obj && obj.length;
+
+  		 console.log(length);
+
+  		 return typeof length === 'number' && length >=0;	 
+  	 };
+
+  	function each( arr, callback ) { 
+  			//如果传入的元素有length属性，判断length长度的值为number并且大于等于0，那就执行如下代码；
+  		if ( isArrayLike ( arr ) ) { 
+
+  			for( var i = 0; i < arr.length; i++ ) { 
+
+  				if ( callback.call( arr[ i ],arr[ i ],i ) === false ) break ;
+  		 	}
+
+  	 	} else { 
+
+  	 		for( var k in arr ) { 
+
+  	 			if ( callback.call( arr[ k ],arr[ k ],k ) === false ) break ;
+
+  	 		 }
+
+  	 	 }
+
+  	 	 return arr;
+  	 }
+
+  	var o = { 
+
+  		name: 'Big-stone',
+  		age: 18,
+  		gender:'男'
+  	};
+
+  	each( o, function( v, i ) { 
+
+  	 	console.log(this);
+  	 	console.log( i + ',' + v );
+
+  	 } )
+
+
+</script>
+</html>

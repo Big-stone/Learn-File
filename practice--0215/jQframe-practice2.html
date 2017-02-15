@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+
+    //上下文调用( 自定义的 this ), call, apply
+
+    function each ( arr, callback ) { 
+
+    	for ( var i = 0; i < arr.length; i++ ) { 
+
+    		if( callback.call( arr[i],arr[ i ],i ) === false ) break;
+
+    	 }
+
+    	 return arr;
+
+     }
+
+     each( [ 1,2,3 ],function () { 
+
+     	console.log(this)
+
+      });
+
+</script>
+</html>
