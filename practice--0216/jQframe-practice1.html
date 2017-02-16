@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自己封装的方法选择案例</title>
+</head>
+<body>
+    <div id="container"></div>    
+    <div id="control"></div>
+</body>
+<script src="imitate.js"></script>
+
+<script>
+    var musices = [];
+    for ( var i = 0; i < 10; i++ ) {
+        musices.push( '歌曲' + i );
+    } 
+    //将复选框放到页面
+    new F( '#container' )[0].innerHTML = F.map( musices,function ( v, i ) { 
+    	return '<input type="checkbox" />' + v + '<br />';
+     }).join( '' );
+
+    //创建按钮
+    var btns = [
+
+    { name: '全选', id: 'all' },
+
+    { name: '全不选', id: 'No' },
+
+    { name: '反选', id: 'reverse' }
+   ];
+
+   new F( '#control' )[ 0 ].innerHTML = F.map( btns,function ( v, i ) {  
+
+   	return '<input type="button" value=" ' + v.name + ' " id="' + v.id + '">';
+
+   }).join( '' );
+
+   //添加事件
+   new F( '#all' )[ 0 ].onclick = function () {
+   	    new F('#container input').each(function () { 
+   	    	this.checked = true;
+   	     });
+    };
+
+   new F( '#No' )[ 0 ].onclick = function () {
+   	    new F('#container input').each(function () { 
+
+   	    	this.checked = false;
+   	     });
+    };
+
+   new F( '#reverse' )[ 0 ].onclick = function () {
+   	    new F('#container input').each(function () { 
+   	    	this.checked = !this.checked;
+   	     });
+    };
+</script>
+</html> 
