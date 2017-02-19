@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>五角星评分案例</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .comment {
+            font-size: 40px;
+            color: pink;
+        }
+
+        .comment li {
+            float: left;
+        }
+
+        ul {
+            list-style: none;
+        }
+    </style>
+    <script src="jquery-1.12.4.js"></script>
+    <script>
+        $(function () {
+            //准备两种星星
+            var kStars = "☆";
+            var sStars = "★";
+            //当前移入的星星变为实心，后面的元素为空心
+          	$('.comment>li').mouseenter(function() { 
+
+          		$(this).text(sStars).prevAll().text(sStars).end().nextAll().text(kStars);
+
+          	 });
+          	//移出时清空所有的星星
+          	$('.comment').mouseleave(function(){ 
+
+          		$(this).children().text(kStars);
+
+          		$(this).children('.current').text(sStars).prevAll().text(sStars);
+
+          	 });
+
+          	//点击某个元素的时候对这个元素进行标记，
+          	$('.comment>li').click(function () { 
+          		//设置一个类名，再进行排它
+          		
+          		$(this).addClass('current').siblings().removeClass('current');
+
+          	 });
+
+
+        });
+    </script>
+</head>
+
+<body>
+<ul class="comment">
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+    <li>☆</li>
+</ul>
+</body>
+
+</html>
